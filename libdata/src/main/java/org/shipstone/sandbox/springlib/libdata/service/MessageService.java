@@ -2,11 +2,7 @@ package org.shipstone.sandbox.springlib.libdata.service;
 
 import org.shipstone.sandbox.springlib.libdata.domain.Message;
 import org.shipstone.sandbox.springlib.libdata.repository.MessageRepository;
-import org.shipstone.sandbox.springlib.libdata.web.exceptions.EntityAlreadyExistException;
 import org.shipstone.sandbox.springlib.libdata.web.exceptions.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +16,11 @@ import java.util.List;
 @Service
 public class MessageService {
 
-  @Autowired
-  private MessageRepository messageRepository;
+  private final MessageRepository messageRepository;
+
+  public MessageService(MessageRepository messageRepository) {
+    this.messageRepository = messageRepository;
+  }
 
   public List<Message> getAll() {
     return messageRepository.findAll();

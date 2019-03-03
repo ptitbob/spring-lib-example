@@ -6,7 +6,6 @@ import org.shipstone.sandbox.springlib.libdata.service.MessageService;
 import org.shipstone.sandbox.springlib.libdata.web.exceptions.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +25,13 @@ import java.util.List;
 @RequestMapping("lib-data/messages")
 public class MessageController {
 
-  @Autowired
-  private MessageService messageService;
+  private final MessageService messageService;
 
   private final Logger logger = LoggerFactory.getLogger(MessageController.class);
+
+  public MessageController(MessageService messageService) {
+    this.messageService = messageService;
+  }
 
   @GetMapping
   public ResponseEntity<List<Message>> getAll() {
