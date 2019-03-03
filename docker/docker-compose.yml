@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app-db:
+    build:
+      context: ./app-db/
+    image: shipstone/springlib-db:1.0
+    container_name: springlib-db
+    ports:
+      - 5432:5432
